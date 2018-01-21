@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="div">
+		<h2>All of our series, just pick one and way to go!</h2>
+		<form class="form" method='GET' action=".">
+			<input type="text" value="{{ request.GET.query }}" placeholder="Search..." name="query" >
+			{# value is what is written in the input text once the GET request has been made #}
+			<button class="btn btn-default" type="submit">Search</button>
+		</form>
+	</div>
+
+	<div>
+		<ul>
+			{# series.get_absolute_url #}
+		{% for series in qs %}
+			<li><a href="{{series.get_absolute_url}}">{{ series.title }}</a></li>
+		{% endfor %}
+		</ul>
+		{% if is_valid == False %}
+			<p>Sorry, no matches for "{{ request.GET.query }}", please try again</p>
+	</div>
+
+	{% endif %}
+
+
+{% endblock content %}

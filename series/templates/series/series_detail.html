@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>{{object.title}}</h1>
+	<h3>Creator: <small>{{ object.creator }}</small> | Productor: <small>{{ object.productor }}</small> | Released: <small>{{ object.released }}</small></h3>
+	
+	{% if episodes_set %}
+	<h4>List of episodes</h4>
+	<form type='GET' action=".">
+		<input type="text" name='episode_query' placeholder="Search by name or id" value='{{request.GET.episode_query}}'>
+		<button class='btn btn-default' type="submit">Go!</button>
+	</form>
+
+	<ul>
+	{% for ep in episodes_set %}
+		<li>{{ ep.ep_number }}. <a href="{{ep.get_absolute_url}}">{{ep.title}}</a></li>
+	{% endfor %}
+	{% if not is_valid %}
+	<p></p>
+		<p>No matches for that search. Please try again</p>
+	{% endif %}
+	</ul>
+	{% endif %}
+	<h4>{{profiles.count}} followers of this series:</h4>
+	<ul>
+		{% for profile in profiles %}
+			<li><a href="{{profile.get_absolute_url}}">{{profile.user.username}}</a></li>
+		{% endfor %}
+	</ul>
+	
+{% endblock content %}

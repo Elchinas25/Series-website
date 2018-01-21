@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h1>{{object.user.username}} profile</h1>
+
+<p><a href="{{request.path}}followers">Followers: </a>{{object.followers.all.count}}</p>
+<p><a href="{{request.path}}following">Following: </a>{{object.user.following.all.count}}</p>
+
+{% if series_set %}
+<h3>{{object.user.username}} likes the folowing series:</h3>
+<ul>
+{% for series in series_set %}
+	<li><a href="{{series.get_absolute_url}}">{{series.title}}</a></li>
+{% endfor %}	
+</ul>
+{% endif %}
+
+
+
+
+
+
+
+
+{% endblock content %}

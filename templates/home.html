@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<h1>Our series, ordered by: {{ordering}}</h1>
+<ul>
+{% for series in qs %}
+	<li><a href="{{series.get_absolute_url}}">{{series.title}}</a></li>
+{% endfor %}
+</ul>
+<form action=".">
+	<label for='select'>Select order</label>
+	<select name="ordering" id='select'>
+		<option value="Rating">Rating</option>
+		<option value="Newest">Newest</option>
+		<option value="Oldest">Oldest</option>
+	</select>
+	<button type="submit">Order</button>
+</form>
+
+
+{% endblock content %}
